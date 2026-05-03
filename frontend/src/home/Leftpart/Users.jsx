@@ -1,7 +1,11 @@
 import React from "react";
 import UserInfo from "./UserInfo";
+import useGetAllUsers from "../../context/useGetAllUsers";
 
 const Users = () => {
+  const [allUsers, loading] = useGetAllUsers();
+  console.log(allUsers);
+
   return (
     <div>
       <h1 className="px-8 py-2 text-white font-semibold bg-slate-800 rounded-md">
@@ -9,20 +13,11 @@ const Users = () => {
       </h1>
       <div
         className="py-2 flex-1 overflow-y-auto"
-        style={{ maxHeight: "calc(74vh)" }}
+        style={{ maxHeight: "calc(84vh - 10vh)" }}
       >
-        <UserInfo />
-        <UserInfo />
-        <UserInfo />
-        <UserInfo />
-        <UserInfo />
-        <UserInfo />
-        <UserInfo />
-        <UserInfo />
-        <UserInfo />
-        <UserInfo />
-        <UserInfo />
-        <UserInfo />
+        {allUsers.map((user, index) => (
+          <UserInfo key={index} user={user} />
+        ))}
       </div>
     </div>
   );
